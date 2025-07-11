@@ -1,5 +1,5 @@
 .idea/
 out/
 *.iml
-/DesktopApp/nbproject/private/
-/DesktopApp/build/
+#/DesktopApp/nbproject/private/
+#/DesktopApp/build/
