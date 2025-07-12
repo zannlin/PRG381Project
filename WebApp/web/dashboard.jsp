@@ -9,6 +9,30 @@
      Welcome, User! btnLogout (invalidates session)-->
 </head>
 <body>
-    <h1>Welcome, insertCode!</h1>
+    <%
+        //get data from database
+        String email = request.getParameter("txtEmail");
+        String name = request.getParameter("txtEmail");
+        String phone = request.getParameter("txtPhoneNumber");
+    %>
+    <h1>Welcome, <%= name %></h1>
+
+    <table border="0">
+        <tbody>
+            <tr>
+                <td>Email</td>
+                <td><%= email %></td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td><%= name %></td>
+            </tr>
+            <tr>
+                <td>Phone</td>
+                <td><%= phone %></td>
+            </tr>
+        </tbody>
+    </table>
+
 </body>
 </html>

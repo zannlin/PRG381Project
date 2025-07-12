@@ -22,7 +22,7 @@
                         </tr>
                         <tr>
                             <td>Enter Phone number</td> <!-- how to format html input -->
-                            <td><input type="text" name="txtPhoneNumber" value="" size="10" /></td>
+                            <td><input type="text" name="txtPhoneNumber" value="" size="50" /></td>
                         </tr>
                         <tr>
                             <td>Enter Password</td> <!-- format password strength -->
@@ -31,8 +31,8 @@
                     </tbody>
                 </table>
 
-                <input type="submit" value="btnSubmit" name="Submit" />
-                <input type="reset" value="btnClear" name="Clear" />
+                <input type="submit" value="Submit" name="btnSubmit" />
+                <input type="reset" value="Clear" name="btnClear" />
 
             <!-- provide user feedback and store securely -->
             </form>
