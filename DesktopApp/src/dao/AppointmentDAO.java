@@ -100,13 +100,13 @@ public class AppointmentDAO {
     }
 
     //Delete appointment by id
-    public static void deleteAppointment(Appointment a) {
+    public static void deleteAppointment(int id) {
         String sql = "DELETE FROM Appointments WHERE id = ?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, a.getId());
+            stmt.setInt(1, id);
             stmt.executeUpdate();
             System.out.println("Appointment deleted");
 

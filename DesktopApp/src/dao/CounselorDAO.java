@@ -94,13 +94,13 @@ public class CounselorDAO {
         }
     }
 
-    public static void deleteCounselor(Counselor c) {
+    public static void deleteCounselor(int id) {
         String sql = "DELETE FROM Counselors WHERE id = ?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, c.getId());
+            stmt.setInt(1, id);
             stmt.executeUpdate();
             System.out.println("Counselor deleted");
 
