@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1>Register to Wellness Services</h1>
-    <form name="dashboard" action="dashboard.jsp" method="POST">
+    <form name="dashboard" action="dashboard.jsp" method="GET">
                 <table border="0">
                     <tbody>
                         <tr>
@@ -36,13 +36,14 @@
                             <td>Enter Password:</td> <!-- format password strength -->
                             <td><input type="password" name="txtPassword" value="" size="50" /></td>
                         </tr>
+                        <tr>
+                            <td><input type="submit" value="Submit" name="btnSubmit" onclick="submitToDB"/></td>
+                            <td><input type="reset" value="Clear" name="btnClear" onclick="clearForm"/></td>
+                        <tr>
                     </tbody>
                 </table>
-
-                <input type="submit" value="Submit" name="btnSubmit" />
-                <input type="reset" value="Clear" name="btnClear" />
-
             <!-- provide user feedback and store securely -->
+
             </form>
 </body>
 </html>

@@ -5,34 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <!-- Welcome page after login
-     Welcome, User! btnLogout (invalidates session)-->
+    <!-- Welcome page after login Welcome, User! btnLogout (invalidates session)-->
 </head>
 <body>
     <%
-        //get data from database
-        String email = request.getParameter("txtEmail");
-        String name = request.getParameter("txtEmail");
-        String phone = request.getParameter("txtPhoneNumber");
+    String name = request.getParameter("txtName");
+    if (name == null || name.trim().isEmpty()) {
+        out.println("Hello, Guest!");
+    } else {
+        out.println("Hello, " + name + "!");
+    }
     %>
-    <h1>Welcome, <%= name %></h1>
-
-    <table border="0">
-        <tbody>
-            <tr>
-                <td>Email</td>
-                <td><%= email %></td>
-            </tr>
-            <tr>
-                <td>Name</td>
-                <td><%= name %></td>
-            </tr>
-            <tr>
-                <td>Phone</td>
-                <td><%= phone %></td>
-            </tr>
-        </tbody>
-    </table>
-
+    <%-- exposes secerts through url link --%>
 </body>
 </html>
