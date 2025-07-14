@@ -11,8 +11,8 @@
 <body>
     <h1><%= "Welcome to WebApp!" %></h1>
     <br/>
-    <a href="register-servlet">Register</a>
+    <a href="register.jsp">Register</a>
     <br/>
-    <a href="login-servlet">Login</a>
+    <a href="login.jsp">Login</a>
 </body>
 </html>
