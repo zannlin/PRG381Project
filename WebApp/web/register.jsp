@@ -13,12 +13,20 @@
                 <table border="0">
                     <tbody>
                         <tr>
-                            <td>Enter Email:</td>
-                            <td><input type="text" name="txtEmail" value="" size="50" /></td>
+                            <td>Enter Student Number:</td>
+                            <td><input type="text" name="txtStudentNumber" value="" size="50" /></td>
                         </tr>
                         <tr>
                             <td>Enter Name:</td>
                             <td><input type="text" name="txtName" value="" size="50" /></td>
+                        </tr>
+                        <tr>
+                            <td>Enter Surname:</td>
+                            <td><input type="text" name="txtSurname" value="" size="50" /></td>
+                        </tr>
+                        <tr>
+                            <td>Enter Email:</td>
+                            <td><input type="text" name="txtEmail" value="" size="50" /></td>
                         </tr>
                         <tr>
                             <td>Enter Phone number</td> <!-- how to format html input -->
