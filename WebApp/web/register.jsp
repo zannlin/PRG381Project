@@ -29,11 +29,11 @@
                             <td><input type="text" name="txtEmail" value="" size="50" /></td>
                         </tr>
                         <tr>
-                            <td>Enter Phone number</td> <!-- how to format html input -->
+                            <td>Enter Phone number:</td> <!-- how to format html input -->
                             <td><input type="text" name="txtPhoneNumber" value="" size="50" /></td>
                         </tr>
                         <tr>
-                            <td>Enter Password</td> <!-- format password strength -->
+                            <td>Enter Password:</td> <!-- format password strength -->
                             <td><input type="password" name="txtPassword" value="" size="50" /></td>
                         </tr>
                     </tbody>
