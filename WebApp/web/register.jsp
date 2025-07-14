@@ -9,32 +9,32 @@
 </head>
 <body>
     <h1>Register to Wellness Services</h1>
-    <form name="dashboard" action="dashboard.jsp" method="GET">
+    <form name="dashboard" action="dashboard.jsp" method="POST">
                 <table border="0">
                     <tbody>
                         <tr>
                             <td>Enter Student Number:</td>
-                            <td><input type="text" name="txtStudentNumber" value="" size="50" /></td>
+                            <td><input required type="text" name="txtStudentNumber" pattern="[0-9]{6}" title="Enter six digit student number." size="50" /></td>
                         </tr>
                         <tr>
                             <td>Enter Name:</td>
-                            <td><input type="text" name="txtName" value="" size="50" /></td>
+                            <td><input required type="text" name="txtName" size="50" /></td>
                         </tr>
                         <tr>
                             <td>Enter Surname:</td>
-                            <td><input type="text" name="txtSurname" value="" size="50" /></td>
+                            <td><input required type="text" name="txtSurname" size="50" /></td>
                         </tr>
                         <tr>
                             <td>Enter Email:</td>
-                            <td><input type="text" name="txtEmail" value="" size="50" /></td>
+                            <td><input required type="email" name="txtEmail" size="50" /></td>
                         </tr>
                         <tr>
                             <td>Enter Phone number:</td> <!-- how to format html input -->
-                            <td><input type="text" name="txtPhoneNumber" value="" size="50" /></td>
+                            <td><input required type="tel" name="txtPhoneNumber" pattern="[0-9]{10}" title="Enter 10 digit phone number." size="50" /></td>
                         </tr>
                         <tr>
-                            <td>Enter Password:</td> <!-- format password strength -->
-                            <td><input type="password" name="txtPassword" value="" size="50" /></td>
+                            <td>Enter Password:</td> <!-- hash password -->
+                            <td><input required type="password" name="txtPassword" pattern=".{8,}" title="Eight characters minimum." size="50" /></td>
                         </tr>
                         <tr>
                             <td><input type="submit" value="Submit" name="btnSubmit" onclick="submitToDB"/></td>
