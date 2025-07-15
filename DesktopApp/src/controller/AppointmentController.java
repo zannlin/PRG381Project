@@ -1,6 +1,7 @@
 package controller;
 
 import dao.AppointmentDAO;
+import dao.CounselorDAO;
 import model.Appointment;
 
 import java.time.LocalDate;
@@ -29,5 +30,9 @@ public class AppointmentController {
     // Delete appointment (Cancel)
     public static void cancelAppointment(int id) {
         AppointmentDAO.deleteAppointment(id);
+    }
+    //Get all counselor names
+    public java.util.List<String> getAllCounselorNames() {
+        return CounselorDAO.getAllCounselorNames();
     }
 }

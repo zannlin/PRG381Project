@@ -3,20 +3,98 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package ui;
-
+import controller.FeedbackController;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 /**
  *
  * @author user
  */
 public class FeedbackPanel extends javax.swing.JPanel {
-
+    private FeedbackController controller;
+    private final InputValidator validator = new InputValidator();
     /**
      * Creates new form FeedbackPanel
      */
     public FeedbackPanel() {
         initComponents();
+        loadFeedbackTable();
     }
+    
+    private void loadFeedbackTable(){
+        java.util.List<model.Feedback> feedback = controller.getAllFeedback();
+        javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel(new String[]{"ID", "Student", "Rating(1-5)", "Comments"}, 0){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+        }
+        };
+        for (model.Feedback f : feedback){
+            model.addRow(new Object[]{
+                f.getId(),
+                f.getStudent(),
+                f.getRating(),
+                f.getComments()
+            });
+        }
+        tblFeedback.setModel(model);
+        tblFeedback.getColumnModel().getColumn(0).setMinWidth(0);
+        tblFeedback.getColumnModel().getColumn(0).setMaxWidth(0);
+        tblFeedback.getColumnModel().getColumn(0).setPreferredWidth(0);
+    }
+    private class InputValidator{
+        public boolean validateTextFields(Object[][] fields) {
+            for (Object[] entry : fields) {
+                JComponent component = (JComponent) entry[0];
+                String placeholder = (String) entry[1];
+                String fieldName = (String) entry[2];
 
+                String text = "";
+
+                if (component instanceof JTextField) {
+                    text = ((JTextField) component).getText().trim();
+                } else if (component instanceof JTextArea) {
+                    text = ((JTextArea) component).getText().trim();
+                } else {
+                    continue;
+                }
+                
+                if (text.isEmpty() || text.equals(placeholder)) {
+                    JOptionPane.showMessageDialog(FeedbackPanel.this,
+                            "Please enter a valid value for " + fieldName,
+                            "Validation Error",
+                            JOptionPane.ERROR_MESSAGE);
+                    component.requestFocus();
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public boolean validateComboBox(JComboBox<?> comboBox, String fieldName) {
+            Object selected = comboBox.getSelectedItem();
+            if (selected == null || selected.toString().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(FeedbackPanel.this,
+                    "Please select a valid " + fieldName,
+                    "Validation Error",
+                    JOptionPane.ERROR_MESSAGE);
+                comboBox.requestFocus();
+                return false;
+            }
+        return true;
+        }
+    }
+    private void clearInputFields(){
+        txtFeedbackName.setText("Enter student name");
+        cbRating.setSelectedIndex(0);
+        txtComments.setText("");
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,7 +118,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
         btnEditFeedback = new javax.swing.JButton();
         btnDeleteFeedback = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
+        txtComments = new javax.swing.JTextArea();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -50,11 +128,11 @@ public class FeedbackPanel extends javax.swing.JPanel {
 
         lblFeedbackName.setText("Student Name");
 
-        txtFeedbackName.setText("name");
+        txtFeedbackName.setText("Enter student name");
 
         lblRating.setText("Rating (1-5)");
 
-        cbRating.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbRating.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
 
         lblComments.setText("Comments");
 
@@ -71,14 +149,29 @@ public class FeedbackPanel extends javax.swing.JPanel {
         jScrollPane4.setViewportView(jScrollPane2);
 
         btnSubmitFeedback.setText("Submit Feedback");
+        btnSubmitFeedback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitFeedbackActionPerformed(evt);
+            }
+        });
 
         btnEditFeedback.setText("Change Feedback");
+        btnEditFeedback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditFeedbackActionPerformed(evt);
+            }
+        });
 
         btnDeleteFeedback.setText("Delete Feedback");
+        btnDeleteFeedback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteFeedbackActionPerformed(evt);
+            }
+        });
 
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jScrollPane5.setViewportView(jTextArea3);
+        txtComments.setColumns(20);
+        txtComments.setRows(5);
+        jScrollPane5.setViewportView(txtComments);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -87,19 +180,19 @@ public class FeedbackPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbRating, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblComments)
                     .addComponent(lblFeedbackName)
-                    .addComponent(txtFeedbackName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFeedbackName, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblRating)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
+                .addGap(49, 49, 49)
                 .addComponent(btnSubmitFeedback)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(btnEditFeedback)
                 .addGap(18, 18, 18)
                 .addComponent(btnDeleteFeedback)
@@ -113,24 +206,82 @@ public class FeedbackPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblFeedbackName)
                         .addGap(18, 18, 18)
-                        .addComponent(txtFeedbackName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtFeedbackName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(lblRating)
                         .addGap(27, 27, 27)
-                        .addComponent(cbRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbRating, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(lblComments)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSubmitFeedback)
-                    .addComponent(btnEditFeedback)
-                    .addComponent(btnDeleteFeedback))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnEditFeedback)
+                        .addComponent(btnDeleteFeedback))
+                    .addComponent(btnSubmitFeedback))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSubmitFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitFeedbackActionPerformed
+        String name = txtFeedbackName.getText().trim();
+        int rating = Integer.parseInt(cbRating.getSelectedItem().toString());
+        String comments = txtComments.getText().trim();
+        if (!validator.validateTextFields(new Object[][] {
+        {txtFeedbackName, "Enter student name", "Student Name"},
+        {txtComments, "", "Comments"}
+        })) return;
+        if (!validator.validateComboBox(cbRating, "Rating")) return;
+            controller.submitFeedback(name, rating, comments);
+            JOptionPane.showMessageDialog(this, "Feedback saved.");
+            loadFeedbackTable();
+            clearInputFields();
+        
+    }//GEN-LAST:event_btnSubmitFeedbackActionPerformed
+
+    private void btnEditFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditFeedbackActionPerformed
+        int selectedRow = tblFeedback.getSelectedRow();
+        if(selectedRow == -1){
+            JOptionPane.showMessageDialog(this, "Please select feedback to adjust");
+        }
+        else{
+            int id = Integer.parseInt(tblFeedback.getValueAt(selectedRow, 0).toString());
+            String student = txtFeedbackName.getText().trim();
+            int rating = Integer.parseInt(cbRating.getSelectedItem().toString());
+            String comments = txtComments.getText().trim();
+            if (!validator.validateTextFields(new Object[][] {
+                {txtFeedbackName, "Enter student name", "Student Name"},
+                {txtComments, "", "Comments"}
+            })) return;
+            if (!validator.validateComboBox(cbRating, "Rating")) return;
+                controller.updateFeedback(id, student, rating, comments);
+                javax.swing.JOptionPane.showMessageDialog(this, "Feedback updated successflly.");
+                loadFeedbackTable();  
+                clearInputFields();   
+        }
+    }//GEN-LAST:event_btnEditFeedbackActionPerformed
+
+    private void btnDeleteFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteFeedbackActionPerformed
+        int selectedRow = tblFeedback.getSelectedRow();
+        if(selectedRow == -1){
+            JOptionPane.showMessageDialog(this, "Please select feedback submission to remove");
+        }
+        else{
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to remove feedback given?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
+        if (confirm != JOptionPane.YES_OPTION){
+            return;
+        }
+        
+        int id = Integer.parseInt(tblFeedback.getValueAt(selectedRow, 0).toString());
+        controller.deleteFeedback(id);
+        JOptionPane.showMessageDialog(this, "Feedback removed successfully.");
+        loadFeedbackTable();
+        clearInputFields();
+        }
+    }//GEN-LAST:event_btnDeleteFeedbackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -143,11 +294,11 @@ public class FeedbackPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea3;
     private javax.swing.JLabel lblComments;
     private javax.swing.JLabel lblFeedbackName;
     private javax.swing.JLabel lblRating;
     private javax.swing.JTable tblFeedback;
+    private javax.swing.JTextArea txtComments;
     private javax.swing.JTextField txtFeedbackName;
     // End of variables declaration//GEN-END:variables
 }

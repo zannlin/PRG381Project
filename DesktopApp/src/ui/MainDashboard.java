@@ -4,6 +4,10 @@
  */
 package ui;
 
+import dao.AppointmentDAO;
+import dao.CounselorDAO;
+import dao.FeedbackDAO;
+
 /**
  *
  * @author user
@@ -11,15 +15,31 @@ package ui;
 public class MainDashboard extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainDashboard.class.getName());
-
+    private AppointmentsPanel appointmentsPanel;
+    private CounselorsPanel counselorsPanel;
+    private FeedbackPanel feedbackPanel;
     /**
      * Creates new form MainDashboard
      */
     public MainDashboard() {
         initComponents();
-        tabMain.addTab("Appointments", new AppointmentsPanel());
-        tabMain.addTab("Counselors", new CounselorsPanel());
-        tabMain.addTab("Feedback", new FeedbackPanel());
+        initializeDatabase();
+        
+        appointmentsPanel = new AppointmentsPanel();
+        counselorsPanel = new CounselorsPanel(this);
+        feedbackPanel = new FeedbackPanel();
+        
+        tabMain.addTab("Appointments", appointmentsPanel);
+        tabMain.addTab("Counselors", counselorsPanel);
+        tabMain.addTab("Feedback", feedbackPanel);
+    }
+    private void initializeDatabase(){
+        AppointmentDAO.createTable();
+        CounselorDAO.createTable();
+        FeedbackDAO.createTable();
+    }
+    public void refreshAppointmentsCounselorList() {
+    appointmentsPanel.loadCounselors();
     }
 
     /**
@@ -35,18 +55,21 @@ public class MainDashboard extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        tabMain.setBackground(new java.awt.Color(102, 102, 255));
+        tabMain.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(tabMain, javax.swing.GroupLayout.PREFERRED_SIZE, 730, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tabMain, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(tabMain, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tabMain, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 

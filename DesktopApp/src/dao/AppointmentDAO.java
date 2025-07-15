@@ -114,4 +114,20 @@ public class AppointmentDAO {
             logger.severe(e.getMessage());
         }
     }
+    //Collect counselor names for combo box
+    public List<String> getAllCounselors(){
+        List<String> names = new ArrayList<>();
+        String sql = "SELECT name FROM counselors";
+        try(Connection conn = DBConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery()){
+            while (rs.next()){
+                names.add(rs.getString("name"));
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return names;
+    }
 }

@@ -108,4 +108,22 @@ public class CounselorDAO {
             logger.severe(e.getMessage());
         }
     }
+    public static List<String> getAllCounselorNames() {
+        List<String> names = new ArrayList<>();
+        String sql = "SELECT name FROM Counselors";
+
+        try (Connection conn = DBConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                names.add(rs.getString("name"));
+            }
+
+        } catch (SQLException e) {
+            logger.severe("Error retrieving counselor names: " + e.getMessage());
+        }
+
+        return names;
+    }
 }
