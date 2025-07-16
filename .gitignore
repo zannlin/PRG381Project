@@ -7,7 +7,5 @@ derby.log
 /db/
 /bcwebapp/nbproject/private/
 /bcwebapp/build/
-/WebApp/target/
-/WebApp/build/
-/WebApp/dist/
-/WebApp/nbproject/private/
+
+
