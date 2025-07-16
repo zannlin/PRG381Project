@@ -5,29 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <!--  Login form for existing users -->
 </head>
 <body>
-
-    <form name="dashboard" action="dashboard.jsp" method="POST">
+    <h1>Login to Wellness Services</h1>
+    <% if (request.getAttribute("errorMessage") != null) { %>
+        <p style="color: red;"><%= request.getAttribute("errorMessage") %></p>
+    <% } %>
+    <form action="login" method="POST"> <!-- Updated from "login-servlet" to "login" -->
         <table border="0">
             <tbody>
                 <tr>
-                    <td>Email</td>
-                    <td><input required type="email" name="txtEmail" size="50" /></td>
+                    <td>Enter Email:</td>
+                    <td><input type="text" name="txtEmail" value="" size="50" /></td>
                 </tr>
                 <tr>
-                    <td>Password</td>
-                    <td><input required type="password" name="txtPassword" pattern=".{8,}" title="Eight characters minimum." size="50" /></td>
-                </tr>
-                <tr><td><input type="submit" value="Submit" name="btnSubmit" onclick="confirmToDB"/></td>
-                    <td><input type="reset" value="Clear" name="btnClear"/></td>
+                    <td>Enter Password:</td>
+                    <td><input type="password" name="txtPassword" value="" size="50" /></td>
                 </tr>
             </tbody>
         </table>
-    </from>
-        <button type="button" name="back"><a href="index.jsp">Back</a></button>
-
+        <input type="submit" value="Login" name="btnLogin" />
+    </form>
 </body>
 </html>
-
