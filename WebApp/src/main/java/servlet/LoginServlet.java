@@ -26,10 +26,10 @@ public class LoginServlet extends HttpServlet {
         String path = request.getServletPath();
 
         if ("/login".equals(path)) {
-            // If user goes to /login, show the login page
+            // If a user goes to /login, show the login page
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else if ("/logout".equals(path)) {
-            // If user goes to /logout, end the session
+            // If a user goes to /logout, end the session
             HttpSession session = request.getSession(false); // Get session only if it exists
             if (session != null) {
                 session.invalidate(); // Clear the session

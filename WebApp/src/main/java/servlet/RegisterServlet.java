@@ -61,14 +61,14 @@ public class RegisterServlet extends HttpServlet {
             return; // Stop if there's an error
         }
 
-        // Check if email format is valid
+        // Check if an email format is valid
         if (!EMAIL_PATTERN.matcher(email).matches()) {
             request.setAttribute("errorMessage", "Invalid email format");
             request.getRequestDispatcher("register.jsp").forward(request, response);
             return;
         }
 
-        // Check if phone number format is valid
+        // Check if a phone number format is valid
         if (!PHONE_PATTERN.matcher(phone).matches()) {
             request.setAttribute("errorMessage", "Invalid phone number format (use 10 digits or format like 012-345-6789)");
             request.getRequestDispatcher("register.jsp").forward(request, response);
@@ -103,7 +103,7 @@ public class RegisterServlet extends HttpServlet {
             System.out.println("User added to database: " + email + ", " + name + ", " + phone);
 
             // Create a User object with the registered data
-            User user = new User(studentNumber, name, surname, email, phone, null); // Password not needed in session
+            User user = new User(studentNumber, name, surname, email, phone, null); // Password is not needed in session
 
             // Save the user details in the session
             HttpSession session = request.getSession();

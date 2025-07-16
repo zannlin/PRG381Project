@@ -5,35 +5,29 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- *
  * @author Bery
  */
 public class ConnectionProvider {
-    public ConnectionProvider() {}
+    public ConnectionProvider() {
+    }
 
     private static final String username = "postgres";
-    private static final String password = "K@@s";
+    private static final String password = "K@@s"; //or whatever your password is?
     private static final String conURL = "jdbc:postgresql://localhost:5432/StudentDB";
     private static final String DRIVER = "org.postgresql.Driver";
     private Connection con;
 
-    public Connection getCon() throws SQLException, ClassNotFoundException {
+    static {
         try {
             Class.forName(DRIVER);
-            this.con = DriverManager.getConnection(conURL, username, password);
-            if (this.con != null) {
-                System.out.println("Connected to database");
-            } else {
-                throw new SQLException("Connection object is null after attempt");
-            }
         } catch (ClassNotFoundException e) {
-            System.out.println("Driver not found: " + e.getMessage());
-            throw e;
-        } catch (SQLException e) {
-            System.out.println("Could not connect: " + e.getMessage());
-            throw e;
+            System.err.println("PostgreSQL JDBC Driver not found.");
+            e.printStackTrace();
         }
-        return con;
+    }
+
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(conURL, username, password);
     }
 
     public String hashPassword(String password) {
@@ -53,11 +47,7 @@ public class ConnectionProvider {
     }
 
     public void Add(String id, String Name, String Surname, String Email, String PhoneNo, String Pass) throws SQLException, ClassNotFoundException {
-        Connection conn = null;
-        PreparedStatement pst = null;
-        try {
-            conn = getCon();
-            pst = conn.prepareStatement("INSERT INTO \"Student\"(student_number, name, surname, email, phone, password) VALUES(?,?,?,?,?,?)");
+        try (Connection conn = getConnection(); PreparedStatement pst = conn.prepareStatement("INSERT INTO \"Student\"(student_number, name, surname, email, phone, password) VALUES(?,?,?,?,?,?)")) {
             pst.setString(1, id);
             pst.setString(2, Name);
             pst.setString(3, Surname);
@@ -65,9 +55,6 @@ public class ConnectionProvider {
             pst.setString(5, PhoneNo);
             pst.setString(6, hashPassword(Pass));
             pst.executeUpdate();
-        } finally {
-            if (pst != null) pst.close();
-            if (conn != null) conn.close();
         }
     }
 
@@ -77,7 +64,7 @@ public class ConnectionProvider {
         ResultSet rs = null;
         boolean exists = false;
         try {
-            conn = getCon();
+            conn = getConnection();
             pst = conn.prepareStatement("SELECT * FROM \"Student\" WHERE email = ?");
             pst.setString(1, email);
             rs = pst.executeQuery();
@@ -96,7 +83,7 @@ public class ConnectionProvider {
         ResultSet rs = null;
         boolean exists = false;
         try {
-            conn = getCon();
+            conn = getConnection();
             pst = conn.prepareStatement("SELECT * FROM \"Student\" WHERE student_number = ?");
             pst.setString(1, studentNumber);
             rs = pst.executeQuery();
@@ -115,7 +102,7 @@ public class ConnectionProvider {
         ResultSet rs = null;
         User user = null;
         try {
-            conn = getCon();
+            conn = getConnection();
             if (conn == null) {
                 throw new SQLException("Database connection is null");
             }
@@ -146,7 +133,7 @@ public class ConnectionProvider {
         ResultSet rs = null;
         User user = null;
         try {
-            conn = getCon();
+            conn = getConnection();
             if (conn == null) {
                 throw new SQLException("Database connection is null");
             }
