@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <link href=".../web/style.css" rel="stylesheet" type="text/css">
     <!-- Registration form for new users -->
     <style>
         .error { color: red; }
@@ -15,6 +16,7 @@
 </head>
 <body>
     <h1>Register to Wellness Services</h1>
+    <div>
     <form action="register" method="post">
         <table border="0">
             <tbody>
@@ -56,5 +58,6 @@
         <!-- Provide user feedback and security note -->
         <p>Ensure your password is at least 8 characters with uppercase, lowercase, and a number. Your data is stored securely.</p>
     </form>
+    </div>
 </body>
 </html>

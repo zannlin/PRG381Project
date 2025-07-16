@@ -5,6 +5,7 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Dashboard</title>
+      <link href=".../web/style.css" rel="stylesheet" type="text/css">
 
   <body>
       <%
@@ -20,8 +21,8 @@
               phone = "Not set";
           }
       %>
-      <h1>Welcome, <%= name %></h1>
-
+      <h1>Welcome, <%= name %>!</h1>
+    <div>
       <table border="0">
           <tbody>
               <tr>
@@ -43,5 +44,6 @@
       <form action="login?logout" method="get">
           <input type="submit" value="Logout">
       </form>
+      </div>
   </body>
   </html>
