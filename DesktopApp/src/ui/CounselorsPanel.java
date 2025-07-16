@@ -6,13 +6,16 @@ package ui;
 import controller.CounselorController;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
+import model.Counselor;
 /**
  *
  * @author user
  */
 public class CounselorsPanel extends javax.swing.JPanel {
     private CounselorController controller;
-    private MainDashboard dashboard;
+    private final MainDashboard dashboard;
     private final InputValidator validator = new InputValidator();
     /**
      * Creates new form CounselorsPanel
@@ -20,20 +23,16 @@ public class CounselorsPanel extends javax.swing.JPanel {
      */
     public CounselorsPanel(MainDashboard dashboard) {
         initComponents();
-        controller = new CounselorController();
         loadCounselorsTable();  
         this.dashboard = dashboard;
     }
     
     private void loadCounselorsTable(){
-        java.util.List<model.Counselor> counselors = controller.getAllCounselors();
-        javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel(new String[]{"ID", "Name", "Specialization", "Availability"}, 0){
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-        }
-        };
-        for (model.Counselor c : counselors){
+        java.util.List<Counselor> counselors = CounselorController.getAllCounselors();
+        DefaultTableModel model = (DefaultTableModel) tblCounselors.getModel();
+        model.setRowCount(0);
+
+        for (Counselor c : counselors){
             model.addRow(new Object[]{
                 c.getId(),
                 c.getName(),
@@ -42,9 +41,9 @@ public class CounselorsPanel extends javax.swing.JPanel {
             });
         }
         tblCounselors.setModel(model);
-        tblCounselors.getColumnModel().getColumn(0).setMinWidth(0);
-        tblCounselors.getColumnModel().getColumn(0).setMaxWidth(0);
-        tblCounselors.getColumnModel().getColumn(0).setPreferredWidth(0);
+        //tblCounselors.getColumnModel().getColumn(0).setMinWidth(0);
+        //tblCounselors.getColumnModel().getColumn(0).setMaxWidth(0);
+        //tblCounselors.getColumnModel().getColumn(0).setPreferredWidth(0);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -87,9 +86,18 @@ public class CounselorsPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Name", "Specialization", "Availability"
+                "ID", "Name", "Specialization", "Availability"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tblCounselors.getTableHeader().setReorderingAllowed(false);
         tblCounselors.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblCounselorsMouseClicked(evt);
@@ -137,7 +145,7 @@ public class CounselorsPanel extends javax.swing.JPanel {
                 .addComponent(lblAvailability)
                 .addGap(18, 18, 18)
                 .addComponent(txtAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,7 +215,7 @@ public class CounselorsPanel extends javax.swing.JPanel {
         {txtAvailability, "Enter counselor availability", "Availability"}
         })) return;
         else {
-            controller.addCounselor(name, specialization, availability);
+            CounselorController.addCounselor(name, specialization, availability);
             JOptionPane.showMessageDialog(this, "Counselor added.");
             loadCounselorsTable();
             clearInputFields();
@@ -237,7 +245,7 @@ public class CounselorsPanel extends javax.swing.JPanel {
                 javax.swing.JOptionPane.showMessageDialog(this, "Please fill in all fields");
             }
             else {
-                controller.updateCounselor(id, name, specialization, availability);
+                CounselorController.updateCounselor(id, name, specialization, availability);
                 JOptionPane.showMessageDialog(this, "Counselor updated successfully.");
                 loadCounselorsTable();
                 clearInputFields();
@@ -259,7 +267,7 @@ public class CounselorsPanel extends javax.swing.JPanel {
             return;
         }
         int id = Integer.parseInt(tblCounselors.getValueAt(selectedRow, 0).toString());
-        controller.deleteCounselor(id);
+        CounselorController.deleteCounselor(id);
         JOptionPane.showMessageDialog(this, "Counselor deleted.");
         loadCounselorsTable();
         clearInputFields();

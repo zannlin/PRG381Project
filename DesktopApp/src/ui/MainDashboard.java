@@ -23,7 +23,7 @@ public class MainDashboard extends javax.swing.JFrame {
      */
     public MainDashboard() {
         initComponents();
-        initializeDatabase();
+        //initializeDatabase();
         
         appointmentsPanel = new AppointmentsPanel();
         counselorsPanel = new CounselorsPanel(this);
