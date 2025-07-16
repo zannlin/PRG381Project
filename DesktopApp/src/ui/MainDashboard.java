@@ -7,7 +7,10 @@ package ui;
 import dao.AppointmentDAO;
 import dao.CounselorDAO;
 import dao.FeedbackDAO;
-
+import javax.swing.*;
+import java.awt.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
 /**
  *
  * @author user
@@ -23,7 +26,7 @@ public class MainDashboard extends javax.swing.JFrame {
      */
     public MainDashboard() {
         initComponents();
-        //initializeDatabase();
+        getContentPane().setBackground(new java.awt.Color(245, 245, 255));
         
         appointmentsPanel = new AppointmentsPanel();
         counselorsPanel = new CounselorsPanel(this);
@@ -32,12 +35,74 @@ public class MainDashboard extends javax.swing.JFrame {
         tabMain.addTab("Appointments", appointmentsPanel);
         tabMain.addTab("Counselors", counselorsPanel);
         tabMain.addTab("Feedback", feedbackPanel);
+        
+        tabMain.setBackground(new java.awt.Color(230, 230, 250));
+        
+        StyleUtil.styleAllButtons(this);
+        StyleUtil.styleAllTables(this);
     }
     private void initializeDatabase(){
         AppointmentDAO.createTable();
         CounselorDAO.createTable();
         FeedbackDAO.createTable();
     }
+    public class StyleUtil {
+    public static void styleButton(JButton button) {
+        button.setBackground(new Color(208, 230, 255));
+        button.setForeground(Color.BLACK);
+        button.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        button.setFocusPainted(false);
+        button.setBorder(BorderFactory.createLineBorder(new Color(160, 200, 255), 1, true));
+    }
+    public static void styleTable(JTable table) {
+        // Table font and row settings
+        table.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        table.setRowHeight(24);
+        table.setShowGrid(false);
+        table.setIntercellSpacing(new Dimension(0, 0));
+        table.setFillsViewportHeight(true);
+        
+        JTableHeader header = table.getTableHeader();
+        header.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        ((DefaultTableCellRenderer) header.getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
+        table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable tbl, Object value,
+                    boolean isSelected, boolean hasFocus, int row, int column) {
+
+                Component c = super.getTableCellRendererComponent(tbl, value, isSelected, hasFocus, row, column);
+
+                if (!isSelected) {
+                    c.setBackground((row % 2 == 0) ? new Color(245, 245, 255) : Color.WHITE);
+                } else {
+                    c.setBackground(new Color(180, 200, 255));
+                }
+
+                return c;
+            }
+        });
+     
+    }
+    public static void styleAllTables(Container container){
+        for (Component comp : container.getComponents()) {
+            if (comp instanceof JTable) {
+                styleTable((JTable) comp);
+            } else if (comp instanceof Container) {
+                styleAllTables((Container) comp); // recurse into child panels
+            }
+        }
+    }
+
+    public static void styleAllButtons(Container container) {
+        for (Component comp : container.getComponents()) {
+            if (comp instanceof JButton) {
+                styleButton((JButton) comp);
+            } else if (comp instanceof Container) {
+                styleAllButtons((Container) comp); // Recursive for nested panels
+            }
+        }
+    }
+}
     public void refreshAppointmentsCounselorList() {
     appointmentsPanel.loadCounselors();
     }
@@ -63,13 +128,13 @@ public class MainDashboard extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(tabMain, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+                .addComponent(tabMain, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(tabMain, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
+                .addComponent(tabMain, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -80,24 +145,11 @@ public class MainDashboard extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ex) {
+            ex.printStackTrace(); // or log the error
         }
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new MainDashboard().setVisible(true));
     }
 

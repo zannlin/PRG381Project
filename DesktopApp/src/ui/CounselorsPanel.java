@@ -54,50 +54,32 @@ public class CounselorsPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblCounselors = new javax.swing.JTable();
+        btnUpdateCounselor = new javax.swing.JButton();
+        btnDeleteCounselor = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         lblName = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         lblSpecialization = new javax.swing.JLabel();
         txtSpecialization = new javax.swing.JTextField();
         lblAvailability = new javax.swing.JLabel();
         txtAvailability = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tblCounselors = new javax.swing.JTable();
         btnAddCounselor = new javax.swing.JButton();
-        btnUpdateCounselor = new javax.swing.JButton();
-        btnDeleteCounselor = new javax.swing.JButton();
+        lblCounselors = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(245, 245, 255));
         setPreferredSize(new java.awt.Dimension(585, 452));
-
-        lblName.setText("Name");
-
-        txtName.setText("Enter counselor name");
-
-        lblSpecialization.setText("Specialization");
-
-        txtSpecialization.setText("Enter counselor specialization");
-
-        lblAvailability.setText("Availability");
-
-        txtAvailability.setText("Enter counselor availability");
 
         tblCounselors.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Name", "Specialization", "Availability"
+                "Name", "Specialization", "Availability"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        tblCounselors.getTableHeader().setReorderingAllowed(false);
+        ));
         tblCounselors.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblCounselorsMouseClicked(evt);
@@ -107,13 +89,7 @@ public class CounselorsPanel extends javax.swing.JPanel {
 
         jScrollPane1.setViewportView(jScrollPane3);
 
-        btnAddCounselor.setText("Add Counselor");
-        btnAddCounselor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddCounselorActionPerformed(evt);
-            }
-        });
-
+        btnUpdateCounselor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnUpdateCounselor.setText("Update Counselor");
         btnUpdateCounselor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,6 +97,7 @@ public class CounselorsPanel extends javax.swing.JPanel {
             }
         });
 
+        btnDeleteCounselor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnDeleteCounselor.setText("Delete Counselor");
         btnDeleteCounselor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,55 +105,103 @@ public class CounselorsPanel extends javax.swing.JPanel {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
+
+        lblName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblName.setText("Name");
+
+        txtName.setText("Enter counselor name");
+
+        lblSpecialization.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblSpecialization.setText("Specialization");
+
+        txtSpecialization.setText("Enter counselor specialization");
+
+        lblAvailability.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblAvailability.setText("Availability");
+
+        txtAvailability.setText("Enter counselor availability");
+
+        btnAddCounselor.setText("Add Counselor");
+        btnAddCounselor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddCounselorActionPerformed(evt);
+            }
+        });
+
+        lblCounselors.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblCounselors.setText("Add Counselors");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtSpecialization, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblName)
+                    .addComponent(lblSpecialization)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblAvailability)
+                    .addComponent(txtAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAddCounselor, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(lblCounselors)))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblCounselors)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblName)
+                .addGap(5, 5, 5)
+                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblSpecialization)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtSpecialization, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblAvailability)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAddCounselor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblName)
-                .addGap(18, 18, 18)
-                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblSpecialization)
-                .addGap(18, 18, 18)
-                .addComponent(txtSpecialization, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblAvailability)
-                .addGap(18, 18, 18)
-                .addComponent(txtAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(btnAddCounselor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(btnUpdateCounselor, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnUpdateCounselor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnDeleteCounselor))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(159, 159, 159))
+                        .addComponent(btnDeleteCounselor, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblName)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSpecialization)
-                    .addComponent(txtSpecialization, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblAvailability)
-                    .addComponent(txtAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddCounselor)
-                    .addComponent(btnUpdateCounselor)
-                    .addComponent(btnDeleteCounselor))
-                .addGap(45, 45, 45))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnUpdateCounselor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDeleteCounselor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 146, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     private void clearInputFields(){
@@ -294,9 +319,11 @@ public class CounselorsPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnAddCounselor;
     private javax.swing.JButton btnDeleteCounselor;
     private javax.swing.JButton btnUpdateCounselor;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblAvailability;
+    private javax.swing.JLabel lblCounselors;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblSpecialization;
     private javax.swing.JTable tblCounselors;
