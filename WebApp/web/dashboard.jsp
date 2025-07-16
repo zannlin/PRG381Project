@@ -11,11 +11,14 @@
     <%
     String name = request.getParameter("txtName");
     if (name == null || name.trim().isEmpty()) {
+        //or search in database then accept guest
         out.println("Hello, Guest!");
     } else {
         out.println("Hello, " + name + "!");
     }
     %>
-    <%-- exposes secerts through url link --%>
+    <form name="login" action="login.jsp" method="POST">
+    <input type="submit" value="Logout" name="btnSubmit" onclick="invalidateSession"/>
+    </form>
 </body>
 </html>
