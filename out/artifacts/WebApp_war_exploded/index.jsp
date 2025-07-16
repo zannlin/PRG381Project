@@ -5,21 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Wellness Services</title>
-    <link href=".../WEB-INF/style.css" rel="stylesheet" type="text/css">
-    <!-- Home page with links to login.jsp and register.jsp
-        basically the landing page, redirects -->
+    <link href="./css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div>
-    <h1>Welcome to Wellness Services!</h1>
-    <br/>
-    <a href="register">Register</a>
-    <br/>
-    <a href="login">Login</a>
-    <br/>
-    <a href="dashboard.jsp">Dashboard</a>
-    <br/>
-
+<div class="container">
+    <h1 class="title">Welcome to Wellness Services!</h1>
+    <div class="link-container">
+        <a href="register" class="btn primary">Register</a>
+        <a href="login" class="btn primary">Login</a>
+    </div>
 </div>
 </body>
 </html>

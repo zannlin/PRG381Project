@@ -12,10 +12,10 @@ public class ConnectionProvider {
     }
 
     private static final String username = "postgres";
-    private static final String password = "K@@s"; //or whatever your password is?
+    private static final String password = "Password"; //or whatever your password is?
     private static final String conURL = "jdbc:postgresql://localhost:5432/StudentDB";
     private static final String DRIVER = "org.postgresql.Driver";
-    private Connection con;
+
 
     static {
         try {
@@ -77,7 +77,7 @@ public class ConnectionProvider {
         return exists;
     }
 
-    public boolean studentNumberExists(String studentNumber) throws SQLException, ClassNotFoundException {
+    public boolean studentNumberExists(String studentNumber) throws SQLException {
         Connection conn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;

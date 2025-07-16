@@ -5,29 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link href=".../WEB-INF/style.css" rel="stylesheet" type="text/css">
+    <link href="./css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h1>Login to Wellness Services</h1>
-<% if (request.getAttribute("errorMessage") != null) { %>
-<p style="color: red;"><%= request.getAttribute("errorMessage") %></p>
-<% } %>
-<div>
-    <form action="login" method="POST"> <!-- Updated from "login-servlet" to "login" -->
-        <table border="0">
-            <tbody>
-            <tr>
-                <td>Enter Email:</td>
-                <td><input required type="text" name="txtEmail" value="" size="50" /></td>
-            </tr>
-            <tr>
-                <td>Enter Password:</td>
-                <td><input required type="password" name="txtPassword" value="" size="50" /></td>
-            </tr>
-            </tbody>
-        </table>
-        <input type="submit" value="Login" name="btnLogin" />
-    </form>
+<div class="container">
+    <h1 class="title">Login to Wellness Services</h1>
+    <% if (request.getAttribute("errorMessage") != null) { %>
+    <p class="error"><%= request.getAttribute("errorMessage") %></p>
+    <% } %>
+    <div class="form-container">
+        <form action="login" method="post">
+            <div class="form-group">
+                <label for="txtEmail">Email:</label>
+                <input type="email" id="txtEmail" name="txtEmail" value="" required class="form-input">
+            </div>
+            <div class="form-group">
+                <label for="txtPassword">Password:</label>
+                <input type="password" id="txtPassword" name="txtPassword" value="" required class="form-input">
+            </div>
+            <div class="button-group">
+                <input type="submit" value="Login" name="btnLogin" class="btn primary">
+            </div>
+        </form>
+    </div>
 </div>
 </body>
 </html>
