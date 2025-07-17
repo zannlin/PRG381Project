@@ -62,4 +62,22 @@
             </div>
             <div class="form-group">
                 <label for="txtPhoneNumber">Phone Number:</label>
-                <input type="tel" id="txtPhoneNumber" name="txtPhoneNumber" value="" required pattern="
+                <input type="tel" id="txtPhoneNumber" name="txtPhoneNumber" value="" required pattern="^\d{10}$|^\d{3}-\d{3}-\d{4}$" placeholder="1234567890 or 012-345-6789" class="form-input">
+            </div>
+            <div class="form-group">
+                <label for="txtPassword">Password:</label>
+                <input type="password" id="txtPassword" name="txtPassword" value="" required minlength="8" placeholder="e.g., Koos123A" class="form-input">
+            </div>
+            <div class="button-group">
+                <input type="submit" value="Submit" name="btnSubmit" class="btn" style="background-color: #f5f5f5; color: black;">
+                <input type="reset" value="Clear" name="btnClear" class="btn" style="background-color: #f5f5f5; color: black;">
+            </div>
+            <% if (request.getAttribute("errorMessage") != null) { %>
+            <p class="error" style="color: white;"><%= request.getAttribute("errorMessage") %></p>
+            <% } %>
+            <p class="note" style="color: white;">Ensure your password is at least 8 characters with uppercase, lowercase, and a number. Registration successful messages will appear here.</p>
+        </form>
+    </div>
+</div>
+</body>
+</html>
